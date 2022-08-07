@@ -1,0 +1,22 @@
+.rightside{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.navicons{
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+
+}
+.navicons>img{
+    width: 1.5rem;
+    height: 1.5rem;
+
+}
+.bt-sh{
+    align-self: center;
+    height: 3rem;
+    width: 80%;
+}
