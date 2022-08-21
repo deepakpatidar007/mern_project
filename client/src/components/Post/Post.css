@@ -12,3 +12,7 @@
     object-fit: cover;
     border-radius: 0.5rem;
 }
+.postReact{
+    display: flex;
+    gap: 1rem;
+}

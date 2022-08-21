@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const UserSchema = mongoose.Schema(
     {
         username:{
@@ -28,8 +27,9 @@ const UserSchema = mongoose.Schema(
         livesin:String,
         worksat:String,
         relationship:String,
-        followers:[],
-        following:[],
+        country:String,
+        followers:[String],
+        following:[String],
         
     },
     {timestamps:true}

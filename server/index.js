@@ -12,6 +12,9 @@ import cors from 'cors'
 //routes
 const app = express();
 
+//to serve images for public
+app.use(express.static('public'))
+app.use('/images',express.static("images"))
 
 
 //middleware

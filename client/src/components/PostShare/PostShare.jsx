@@ -1,5 +1,5 @@
 import React, {useState,useRef} from "react";
-import ProfilImage from "../../img/profileImg.jpg";
+//import ProfilImage from "../../img/profileImg.jpg";
 import "./PostShare.css";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
@@ -15,7 +15,8 @@ const PostShare = () => {
     const [image,setImage] = useState(null);
     const imageRef = useRef();
     const desc = useRef()
-    const {user} = useSelector((state)=>state.authReducer.authData )
+    const user = useSelector((state)=>state.authReducer.authData)
+    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
     const dispatch = useDispatch()
 
     const onImageChange = (event)=>{
@@ -23,6 +24,10 @@ const PostShare = () => {
             let img = event.target.files[0];
             setImage(img)
         }
+    }
+    const reset = ()=>{
+      setImage(null);
+      desc.current.value=""
     }
     const handleSubmit = (e)=>{
       e.preventDefault();
@@ -45,12 +50,12 @@ const PostShare = () => {
         }
       }
       dispatch(uploadPost(newPost))
-
+      reset()
     }
 
   return (
     <div className="PostShare">
-      <img src={ProfilImage} alt="" />
+      <img src={user.profilePicture? serverPublic + user.coverPicture : serverPublic + "defaultProfile.png"} alt="" />
       <div>
         <input 
         ref={desc}
@@ -80,8 +85,9 @@ const PostShare = () => {
             Schedule
           </div>
           <button className="button ps-button"
-          onClick={handleSubmit} >
-            Share
+          onClick={handleSubmit} 
+          disabled={loading}>
+            {loading?"Uploading...":"Share"}
           </button>
           <div style={{display:"none"}}>
             <input type='file' name='myImage' 
@@ -99,7 +105,7 @@ const PostShare = () => {
         }
       </div>
     </div>
-  );
+  )
 };
 
 export default PostShare;

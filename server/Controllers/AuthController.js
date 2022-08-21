@@ -14,7 +14,7 @@ export const  registerUser = async(req,res)=>{
     const newUser = new UserModel(req.body)
     const {username} = req.body
     try{
-        const oldUser = await UserModel.findOne({username})
+        const oldUser = await UserModel.findOne({username}) 
 
         if(oldUser){
             return res.status(400).json({message:"username is already registered!"});
@@ -34,32 +34,31 @@ export const  registerUser = async(req,res)=>{
 
 export const loginUser = async (req,res) => {
     const {username,password} = req.body
-
+    
     try {
         const user = await UserModel.findOne({username:username})
 
         if(user){
             const validity = await bcrypt.compare(password,user.password)
-            // if(!validity)
-            // {
-            //     res.status(400).json("wrong password")
-            //     return
-            // }
-            // else
-            // {
-            //     const token = jwt.sign({
-            //         username:user.username, id:user._id
-            //     },process.env.JWT_KEY,{expiresIn:'1h'})
-            //     res.status(200).json({user,token})
-            //     return
-            // }
-
-            validity? res.status(200).json(user):res.status(400).json("wrong password")
+            console.log(user)
+            if(!validity)
+            {
+                res.status(400).json("wrong password")
+            }
+            else
+            {
+                const token = jwt.sign({
+                    username:user.username, id:user._id
+                },process.env.JWT_KEY,{expiresIn:'1h'})
+                res.status(200).json({user,token})
+            }
+            //return user
+            //validity? res.status(200).json(user):res.status(400).json("wrong password")
             
         }
         else
-            res.status(404).json("user does not exists")
+          return  res.status(404).json("user does not exists")
      } catch (error) {
-         res.status(500).json("message")
+        return res.status(500).json(error)
      }
 }

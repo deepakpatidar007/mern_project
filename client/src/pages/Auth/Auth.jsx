@@ -12,7 +12,6 @@ const Auth = () => {
     const dispatch = useDispatch()
     const loading = useSelector((state)=>state.authReducer.loading)
     const [isSignUp,setIsSignUp] = useState(true)
-    console.log(loading)
     const [data,setData] = useState({firstname:"",lastname:"",password:"",confirmpass:"",username:""})
     const [confirmPass,setConfirmPass] = useState(true)
 
@@ -34,6 +33,7 @@ const Auth = () => {
         setData({
             firstname:"",lastname:"",password:"",confirmpass:"",username:""
         })
+        
     }
 
   return (
@@ -102,30 +102,6 @@ const Auth = () => {
   )
 }
 
-function LogIn(){
-    return(
-        <div className="a-right">
-            <form action="" className="infoform authform">
-                <h3>SignUp</h3>
-                
-                <div>
-                    <input type="text" placeholder='username' 
-                    className="infoinput" name='username' />
-                </div>
-                <div>
-                    <input type="text" placeholder='password' 
-                    className="infoinput" name='password'/>
-                    
-                </div>
-                <div>
-                    <span>Don't have an account? Sign up</span>
-                </div>
-                <button className="button infobutton" type='submit'>
-                    Login
-                </button>
-            </form>
-        </div>
-    )
-}
+
 
 export default Auth
